@@ -1,0 +1,21 @@
+- This is the ER diagram of our project. Some of the important entities are Person, Disease, Oberservation, Alert, HealthIndicator, Appointment, LabReport etc.
+- Person table contains general information relevant to a person such as their name, age, Date of birth, email, phone etc. 
+- A person can be a sick patient, health supporter or health provider.
+- For Sick patient, apart from the general information, we also store the diseases he is suffering from.
+- Health supporters are people who look after the patient by monitoring their health records and lab reports. There are 2 types of health supporters Primary and Secondary and both of them can access the patients health records
+- Disease table contains list of diseases. Each diseases can have one or more health indicators associated with it. For example, some of the health indicators relevant for Heart Attack would be Blood Pressure, Weight, Heart Rate etc.
+- HealthIndicator table would store all such health indicators. Each health indicator would also contain a general acceptable set of values that are considered normal. Health indicators can be of two types: Range specific or Enum. For example, Weight would be a Range specific health indicator as the ideal weight is usually mentioned as 50 to 70 kgs etc. and Type of cough would be an example for Enum type as it could be either Dry cough, Whooping cough etc.
+- In some scenarios, Health Providers can provide Health indicator values which are slightly deviated from the normal values but are considered acceptable for a specific patient. To accommodate such scenarios, we use PatientSpecificHI_range and PatientSpecificEnum tables to store such custom values for the patients. 
+- Oberservation table contains all the observations of health indicators that a Patient has taken. When an observation is recorded, if the observation values are beyond the acceptable values for the Patient, an alert would be generated and sent to the health supporters.
+- A Patient can schedule an Appointment with a HealthProvider and this information is stored in the appointment table.
+- A Health provider can prescribe a set of lab tests to be taken for the patient and the results of such lab tests would be available in LabReport table.
+- TestRange table would store the normal ranges for each type of test.
+
+
+
+
+We have created an encrypted column to store a person's password which he uses while logging in to his profile. Doing so would enhance data security.
+
+We have implemented a table level check constraint to prevent a patient from booking an appointment with the healthProvider having avg rating less than 1. So when a patient tries to book an appointment with a healthprovider, we check the average rating of the healthprovider and determine if the appointment can be made with the healthProvider. As you can see in the example, there would be an error when an appointment is being made with healthProvider not having an average rating greater than 1
+
+Geetha would be taking over next
